@@ -4,7 +4,7 @@ let products = JSON.parse(localStorage.getItem("products"))
       {
         title: "Seasons #K1054 polerised glasses #black ",
         category: "shades",
-        price: 55.99,
+        price: 420.99,
         img: "https://media.takealot.com/covers_images/a15b9e53a240406bbef3c3bcf2bcf7f6/s-pdpxl.file",
       },
       {
@@ -46,6 +46,7 @@ let cart = JSON.parse(localStorage.getItem("cart"))
 
 // READ
 function readProducts(products) {
+  document.querySelector("#badge").innerHTML = cart.length;
   document.querySelector("#products").innerHTML = "";
   products.forEach((product, position) => {
     document.querySelector("#products").innerHTML += `
@@ -54,14 +55,18 @@ function readProducts(products) {
         <div class="card-body">
           <h5 class="card-title">${product.title}</h5>
           <p class="card-text">R${product.price}</p>
+          <p>Quantity:<p>
+        
+          <input type="number" min=1 value=1 id="addtoCart${position}" style="width:150px">
+
+          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart" onclick="addtoCartProduct(${position})"><i class="material-icons">shopping_cart</i></button>
           
-          <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editProduct${position}" >
-            Edit
+          <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#editProduct${position}" ><i class="material-icons">edit</i>
           </button>
           <button type="button" class="btn btn-danger" onclick="deleteProduct(${position})" >
-            Delete
+          <i class="material-icons">delete</i>
           </button>
-          <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#cart" onclick="addtoCart(${position})">Add to Cart</button>
+          
           
 
            
@@ -216,8 +221,10 @@ function deleteProduct(position) {
 }
 
 // ADD TO CART
-function addtoCart(position) {
-  // let addCart = document.querySelector(`#addCart${position}`).value;
-  cart.push({ ...products[position] });
+function addtoCartProduct(position) {
+  let qty = document.querySelector(`#addtoCart${position}`).value;
+
+  cart.push({ ...products[position], qty });
+  document.querySelector("#badge").innerHTML = cart.length;
   localStorage.setItem("cart", JSON.stringify(cart));
 }

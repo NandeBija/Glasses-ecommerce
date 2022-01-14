@@ -1,5 +1,7 @@
 #products {
   flex-wrap: wrap;
+  gap: 60px;
+  padding-top: 35px;
 }
 
 #products img {
@@ -8,5 +10,15 @@
 }
 
 .card {
-  width: calc(100% / 3);
+  /* width: calc(100% / 3); */
+
+  width: 30%;
+}
+/* .card:hover {
+  transform: scale(1.1);
+} */
+
+#seasons {
+  background-image: url("https://cache.desktopnexus.com/thumbseg/1153/1153752-bigthumbnail.jpg");
+  font-size: 4rem;
 }

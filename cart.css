@@ -1,0 +1,17 @@
+#cart {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 60px;
+  padding-top: 35px;
+}
+
+#cart img {
+  height: 300px;
+  object-fit: cover;
+}
+
+.card {
+  /* width: calc(100% / 3); */
+
+  width: 30%;
+}
