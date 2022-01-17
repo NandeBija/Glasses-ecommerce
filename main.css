@@ -1,3 +1,18 @@
+* {
+  font-family: "Rajdhani";
+  font-weight: 500;
+  font-size: 18px;
+}
+.navbar {
+  background-image: url("Screenshot\ from\ 2022-01-17\ 12-18-10.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 130px;
+}
+body {
+  background-color: rgba(255, 255, 255, 0.178);
+}
+
 #products {
   flex-wrap: wrap;
   gap: 60px;
@@ -13,12 +28,14 @@
   /* width: calc(100% / 3); */
 
   width: 30%;
+  border-radius: 4%;
+  box-shadow: black 10px;
 }
 /* .card:hover {
   transform: scale(1.1);
 } */
 
 #seasons {
-  background-image: url("https://cache.desktopnexus.com/thumbseg/1153/1153752-bigthumbnail.jpg");
-  font-size: 4rem;
+  /* background-image: url("https://cache.desktopnexus.com/thumbseg/1153/1153752-bigthumbnail.jpg"); */
+  font-size: 6rem;
 }

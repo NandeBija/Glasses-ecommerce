@@ -2,39 +2,39 @@ let products = JSON.parse(localStorage.getItem("products"))
   ? JSON.parse(localStorage.getItem("products"))
   : [
       {
-        title: "Seasons #K1054 polerised glasses #black ",
-        category: "shades",
+        title: "Seasons polerised glasses #black ",
+        category: "Women",
         price: 420.99,
         img: "https://media.takealot.com/covers_images/a15b9e53a240406bbef3c3bcf2bcf7f6/s-pdpxl.file",
       },
       {
-        title: "Seasons #K32022Coin glasses #black + gold",
-        category: "shades",
+        title: "Seasons Coin glasses #black + gold",
+        category: "Men",
         price: 229.99,
         img: "https://images.unsplash.com/photo-1511499767150-a48a237f0083?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8c2hhZGVzfGVufDB8fDB8fA%3D%3D&w=1000&q=80",
       },
       {
-        title: "Seasons Summer #001 meowie #blood red",
-        category: "shades",
+        title: "Seasons Summer-meowie #blood red",
+        category: "Women",
         price: 158.99,
         img: "https://i.pinimg.com/736x/1b/66/4c/1b664c00c6bf3170d428c0bc564c80a9.jpg",
       },
       {
-        title: "Seasons #K32002Coin glasses #midnight green + gold",
-        category: "shades",
+        title: "Seasons Coin glasses #midnightGreen + gold",
+        category: "Men",
         price: 189.99,
         img: "https://cdn.shopify.com/s/files/1/0661/7423/products/airplane-mode-002-front_250x250@2x.jpg?v=1620045390",
       },
       {
-        title: "Seasons Summer #02 izaza #sunset pink",
-        category: "shades",
+        title: "Seasons Summer izaza #sunset pink",
+        category: "Kids",
         price: 133.59,
         img: "https://realshades.com/wp-content/uploads/2018/08/screen-shades-pink.jpg",
       },
 
       {
-        title: "Seasons #K22002 Sahara #BeeInspired",
-        category: "shades",
+        title: "Seasons Sahara #BeeInspired",
+        category: "Men",
         price: 345.99,
         img: "https://media.istockphoto.com/photos/croatian-beach-mirroring-in-sunglasses-on-towel-picture-id1278067767?b=1&k=20&m=1278067767&s=170667a&w=0&h=CGCBCIQDyuagQaiyO0LanJk-JL4Wl0_akEjonhL3ArQ=",
       },
@@ -44,7 +44,7 @@ let cart = JSON.parse(localStorage.getItem("cart"))
   ? JSON.parse(localStorage.getItem("cart"))
   : [];
 
-// READ
+// Read
 function readProducts(products) {
   document.querySelector("#badge").innerHTML = cart.length;
   document.querySelector("#products").innerHTML = "";
@@ -163,7 +163,7 @@ function readProducts(products) {
 
 readProducts(products);
 
-// CREATE
+// Create
 function createProduct() {
   let title = document.querySelector("#addTitle").value;
   let category = document.querySelector("#addCategory").value;
@@ -185,7 +185,7 @@ function createProduct() {
   }
 }
 
-// UPDATE
+// Update
 function updateProduct(position) {
   let title = document.querySelector(`#editTitle${position}`).value;
   let category = document.querySelector(`#editCategory${position}`).value;
@@ -207,7 +207,7 @@ function updateProduct(position) {
   }
 }
 
-// DELETE
+// Delete
 function deleteProduct(position) {
   let confirmation = confirm(
     "Are you sure you want to delete the selected product?"
@@ -220,11 +220,59 @@ function deleteProduct(position) {
   }
 }
 
-// ADD TO CART
+// Add to Cart
 function addtoCartProduct(position) {
   let qty = document.querySelector(`#addtoCart${position}`).value;
 
   cart.push({ ...products[position], qty });
   document.querySelector("#badge").innerHTML = cart.length;
   localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+// Sorting by Category
+function sortbyCategory() {
+  let category = document.querySelector("#sortCategory").value;
+
+  if (category == "All") {
+    return readProducts(products);
+  }
+
+  let foundProducts = products.filter((product) => {
+    return product.category == category;
+  });
+
+  readProducts(foundProducts);
+  console.log(foundProducts);
+}
+
+// Sorting by name
+
+function sortbyName() {
+  let direction = document.querySelector("#sortName").value;
+
+  let sortedProducts = products.sort((a, b) => {
+    if (a.title.toLowerCase() < b.title.toLowerCase()) {
+      return -1;
+    }
+    if (a.title.toLowerCase() > b.title.toLowerCase()) {
+      return 1;
+    }
+    return 0;
+  });
+  if (direction == "descending") sortedProducts.reverse();
+  console.log(sortedProducts);
+  readProducts(products);
+}
+
+// Sorting by price
+
+function sortPrice() {
+  let direction = document.querySelector("#sortPrice").value;
+
+  let sortedProducts = products.sort((a, b) => a.price - b.price);
+
+  console.log(sortedProducts);
+
+  if (direction == "descending") sortedProducts.reverse();
+  readProducts(sortedProducts);
 }
